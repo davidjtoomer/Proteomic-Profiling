@@ -20,6 +20,7 @@ To ensure that everything was installed properly, run the following command:
 Once all the dependencies are installed, you can run the program by first changing to the src directory and then running the main program. Use the following commands to execute this from within the repository directory:
 
 > cd src
+>
 > python secreted.py
 
 The program will ask you to input the necessary information, such as excel filenames and sheet names. The program currently takes around one minute to retrieve the proper annotation for 50 proteins.
