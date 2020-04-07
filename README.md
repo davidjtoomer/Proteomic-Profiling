@@ -4,15 +4,7 @@ This program scrapes the UniProt online database to determine which proteins in 
 # Setting up the Python Virtualenv
 This program runs on Python 3.x and leverages several external libraries (Pandas, NumPy, Selenium, BeautifulSoup, etc.) that will need to be downloaded. One easy way to do so is using a virtual environment through Anaconda, which can be easily downloaded at https://www.anaconda.com/distribution. 
 
-Once installed, download this repository and unzip its contents. Open up your command-line interface (e.g. Terminal) and navigate to the unzipped directory using **cd** (*[here's a refresher for navigating the file system in Terminal](https://macpaw.com/how-to/use-terminal-on-mac)*). Run the following commands to create the virtualenv and install all dependencies:
-
-> cd <path_to_directory>
->
-> conda env create -f environment.yml
->
-> conda activate secreted-labeler
-
-To ensure that everything was installed properly, run the following command:
+Once installed, download this repository and unzip its contents. Open up your command-line interface (e.g. Terminal) and navigate to the unzipped directory using **cd** (*[here's a refresher for navigating the file system in Terminal](https://macpaw.com/how-to/use-terminal-on-mac)*). The configure.sh script is set up to download any requirements automatically, so simply run the following command to create the virtualenv and install all dependencies:
 
 > ./configure.sh
 
