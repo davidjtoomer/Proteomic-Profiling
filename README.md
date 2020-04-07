@@ -1,4 +1,4 @@
-# Secreted-Protein-Labeller
+# Secreted-Protein-Labeler
 This program scrapes the UniProt online database to determine which proteins in a large set are secreted. This program was developed for use in the Svensson Lab at the Stanford School of Medicine Department of Pathology. Find more information about the research at the Svensson lab here: http://www.svenssonlabstanford.org/
 
 # Setting up the Python Virtualenv
@@ -8,7 +8,7 @@ Once installed, download this repository and unzip its contents. Open up your co
 
 > conda env create -f environment.yml
 >
-> conda activate secreted-labeller
+> conda activate secreted-labeler
 
 To ensure that everything was installed properly, run the following command:
 
