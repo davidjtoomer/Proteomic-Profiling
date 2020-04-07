@@ -7,6 +7,7 @@ This program runs on Python 3.x and leverages several external libraries (Pandas
 Once installed, download this repository and unzip its contents. Open up your command-line interface (e.g. Terminal) and navigate to the unzipped directory using **cd** (*If you would like an overview for navigating the file system in Terminal, check out this article on https://macpaw.com/how-to/use-terminal-on-mac*). Run the following commands to create the virtualenv and install all dependencies:
 
 > conda env create -f environment.yml
+>
 > conda activate secreted-labeller
 
 To ensure that everything was installed properly, run the following command:
