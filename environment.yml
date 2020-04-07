@@ -1,0 +1,8 @@
+name: secreted-labeler
+channels:
+  - defaults
+dependencies:
+  - python=3.7
+  - pandas
+prefix: /anaconda3/envs/secreted-labeler
+
