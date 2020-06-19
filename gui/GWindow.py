@@ -1,85 +1,78 @@
-import pandas as pd
-import sys
-from bs4 import BeautifulSoup
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
+import tkinter as tk
+import tkinter.font as font
+from gui.GFrame import GFrame, GSeparator
+from gui.Meta import *
 
-import util
-from util.set_driver import *
-from util.utils import *
+class GWindow(tk.Tk):
 
-# base URL for the UniProt website, followed by UniProt ID for search result
-UNIPROT_URL = 'https://www.uniprot.org/uniprot/'
+	def __init__(self, *args, **kwargs):
 
-if __name__ == '__main__':
+		tk.Tk.__init__(self, *args, **kwargs)
 
-	#######################################################
-	# SELECT EXCEL FILE 
-	#######################################################
+		# set window size, move to center of the screen 
+		self.update_idletasks()
+		xpos = (self.winfo_screenwidth() // 2) - (window_width // 2)
+		ypos = (self.winfo_screenheight() // 2) - (window_height // 2)
+		self.geometry('{}x{}+{}+{}'.format(window_width, window_height, xpos, ypos))
 
-	_ = input("PRESS [ENTER] TO CHOOSE AN EXCEL FILE FOR PROTEOMIC PROFILING.")
-	Tk().withdraw() # keep the root window from displaying
-	filename = askopenfilename() 
+		# expand all frames to fit full column width
+		self.columnconfigure(0, weight = 1)
 
-	# make sure that the file is an Excel file
-	while not filename.matches('*.xls') or not filename.matches('*.xlsx')
-		print("ERROR: File is not a valid Excel sheet.\n")
+		# set background color
+		self.configure(bg = bg1, padx = 10, pady = 10)
 
-		_ = input("TYPE \'EXIT\' TO QUIT or PRESS [ENTER] TO CHOOSE AN EXCEL FILE FOR PROTEOMIC PROFILING.")
-		if _ == 'EXIT': 
-			sys.exit()
+		# begin the program
+		self.introduction()
 
-		filename = askopenfilename()
+		# fonts = font.families()
+		# for ex in fonts:
+			# print(ex + '\n')
 
+	def introduction(self):
 
-	#######################################################
-	# GET SHEETS IN EXCEL FILE AND SELECT SHEET(S)  
-	#######################################################
+		header_frame = GFrame(self)
+		header_frame.grid(row = 0, column = 0, sticky = 'WE')
 
-	# load the input Excel file
-	xls = pd.ExcelFile(filename)
-	sheet_names = xls.sheet_names
+		# header label
+		header = tk.Label(header_frame, text = introduction_header_text, bg = bg2, fg = accent1)
+		header['font'] = font.Font(family = family, size = h3, weight = font.BOLD)
+		header.grid(row = 0, column = 0)
+		
+		self.separate() # note: uses row 1
 
-	# print out all of the sheet names for viewing
-	print("SHEET NAMES IN %s:" %filename.upper())
-	for i in range(len(sheet_names)):
-		print(i + ") " + sheet_names[i])
+		# introduction frame
+		introduction_frame = GFrame(self)
+		introduction_frame.grid(row = 2, sticky = 'WE')
 
-	# have the user choose which sheet to pick from
-	while True:
-		sheets = input("CHOOSE ONE OR MORE OF THE ABOVE SHEETS (by NUMBER, comma separated, no spaces after commas): ").replace(" ", "").split(',')
-		error = NULL
-		if len(sheets) != len(set(sheets)):
-			error = "duplicate values"
-		for sheet in set(sheets):
-			if (!sheet.isdigit() or int(sheet) >= len(sheets)):
-				error = "value is not a number or is out of valid range"
-		if not error: break
-		else: print("ERROR: Input not valid (" + error + ").\n")
+		introduction = tk.Message(introduction_frame, text = introduction_text, bg = bg2, fg = fg, anchor = 'w', justify = tk.LEFT, width = window_width - 50)
+		introduction['font'] = font.Font(family = family, size = p)
+		introduction.grid(row = 0, column = 0, sticky = 'WE')
 
+		# add button to move to the next section
+		advance = tk.Button(introduction_frame, text = 'Click Here to Continue', fg = bg1, padx = 20, pady = 10)
+		advance.grid(row = 1, column = 0)
 
-	# get columns in sheetname(s)
-	# choose column in sheet
+	def separate(self):
+		separator = GSeparator(self, height = 10)
+		separator.grid()
 
-	sheet_name = 'Fold 1 over 2+3'
-	column_name = 'SECRETED'
+	def choose_file(self):
+		return
 
 
-	to_label = read_excel_sheet(file_name, sheet_name)
-	to_label[column_name] = to_label[column_name].astype('object')
 
-	# install the chromedriver in the util/lib/ directory for scraping the UniProt website
-	CHROMEDRIVER_PATH = install_driver()
-	driver = setup_driver(CHROMEDRIVER_PATH)
 
-	uniprot_id = to_label['UniprotID']
-	for i, ID in uniprot_id.iteritems():
-		# replace with progress bar
-		if i < 10:
-			print("LOOKING AT PROTEIN %d OF %d" %(i, len(to_label)))
-			url = UNIPROT_URL + ID
-			to_label.at[i, column_name] = extract_data(url, driver) 
 
-	with pd.ExcelWriter(file_name) as writer:
-		to_label.to_excel(writer, sheet_name = sheet_name, columns = [column_name])
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
