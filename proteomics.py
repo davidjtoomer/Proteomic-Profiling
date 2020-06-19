@@ -1,18 +1,31 @@
+'''
 import pandas as pd
 import sys
 from bs4 import BeautifulSoup
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
+'''
 
+from gui.GWindow import GWindow
+from gui.GFrame import GFrame
+
+'''
 import util
 from util.set_driver import *
 from util.utils import *
 
+
 # base URL for the UniProt website, followed by UniProt ID for search result
 UNIPROT_URL = 'https://www.uniprot.org/uniprot/'
+'''
 
 if __name__ == '__main__':
 
+	# make main window
+	root = GWindow()
+	root.title("Proteomic Profiling: Subcellular Location Labeler")
+	root.mainloop()
+	'''
 	#######################################################
 	# SELECT EXCEL FILE 
 	#######################################################
@@ -82,4 +95,5 @@ if __name__ == '__main__':
 
 	with pd.ExcelWriter(file_name) as writer:
 		to_label.to_excel(writer, sheet_name = sheet_name, columns = [column_name])
+	'''
 	
